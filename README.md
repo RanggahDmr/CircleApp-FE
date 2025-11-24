@@ -25,14 +25,14 @@ CircleApp adalah aplikasi media sosial mini tempat pengguna bisa membuat thread,
 
 🧰 Tech Stack
 
-Frontend: React, Redux Toolkit, Tailwind CSS, ShadCN UI
+- Frontend: React, Redux Toolkit, Tailwind CSS, ShadCN UI
 
-Backend: Express.js + TypeScript
+- Backend: Express.js + TypeScript
 
-Database: PostgreSQL (Prisma ORM)
+- Database: PostgreSQL (Prisma ORM)
 
-Realtime: Socket.IO
+- Realtime: Socket.IO
 
-Storage: Cloudinary
+- Storage: Cloudinary
 
 Tools: Axios, JWT Auth, Vercel (FE), Railway/Render (BE)
