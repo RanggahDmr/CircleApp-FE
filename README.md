@@ -35,4 +35,3 @@ CircleApp adalah aplikasi media sosial mini tempat pengguna bisa membuat thread,
 
 - Storage: Cloudinary
 
-Tools: Axios, JWT Auth, Vercel (FE), Railway/Render (BE)
