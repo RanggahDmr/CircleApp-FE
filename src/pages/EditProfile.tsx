@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ImageIcon } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function EditProfile() {
   const user = useAppSelector((s) => s.auth.user);
@@ -19,34 +20,45 @@ export default function EditProfile() {
   });
   const [uploading, setUploading] = useState(false);
 
-  // Upload ke Cloudinary (bisa juga ke BE kalau ada endpoint)
- const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  const file = e.target.files?.[0];
-  if (!file) return;
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-  setUploading(true);
+    setUploading(true);
 
-  const data = new FormData();
-  data.append("file", file);
-  data.append("upload_preset", "circleapp_unsigned"); 
-  data.append("folder", "circleapp/avatars"); 
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "circleapp_unsigned");
+    data.append("folder", "circleapp/avatars");
 
-  const res = await fetch(
-    "https://api.cloudinary.com/v1_1/dk9eiz9me/image/upload",
-    { method: "POST", body: data }
-  );
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dk9eiz9me/image/upload",
+      { method: "POST", body: data }
+    );
 
-  const result = await res.json();
-  console.log("Cloudinary result:", result); // debug
-  setForm((prev) => ({ ...prev, photo_profile: result.secure_url }));
-
-  setUploading(false);
-};
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await dispatch(editProfile(form));
-    navigate("/home"); 
+    const result = await res.json();
+    setForm((prev) => ({ ...prev, photo_profile: result.secure_url }));
+    setUploading(false);
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const res = await dispatch(editProfile(form));
+
+  if (editProfile.fulfilled.match(res)) {
+    toast.success("Profil berhasil diperbarui");
+
+    // beri jeda sedikit biar toast sempat tampil
+    setTimeout(() => {
+      navigate("/home");
+    }, 500);
+
+  } else {
+    toast.error("Gagal memperbarui profil");
+  }
+};
+
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-black text-white">
@@ -56,55 +68,53 @@ export default function EditProfile() {
         </CardHeader>
         <CardContent className="text-white">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            
             {form.photo_profile && (
-                <img
+              <img
                 src={form.photo_profile}
                 alt="preview"
                 className="w-20 h-20 rounded-full object-cover mx-auto"
               />
-              
             )}
+
             <label
-                htmlFor="photo-upload"
-                className="flex items-center gap-2 cursor-pointer text-green-500 hover:text-green-400"
+              htmlFor="photo-upload"
+              className="flex items-center gap-2 cursor-pointer text-green-500 hover:text-green-400"
             >
-                <ImageIcon size={20} />
-                <span className="text-sm">Upload Photo</span>
+              <ImageIcon size={20} />
+              <span className="text-sm">Upload Photo</span>
             </label>
+
             <Input
-                id="photo-upload"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleFileChange}
-      />   
-                {/* {form.photo_profile && (
-                  <img
-                    src={form.photo_profile}
-                    alt="preview"
-                    className="w-20 h-20 rounded-full object-cover mx-auto"
-                  />
-                )} */}
+              id="photo-upload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleFileChange}
+            />
 
             <Input
               placeholder="Full Name"
               value={form.full_name}
               onChange={(e) => setForm({ ...form, full_name: e.target.value })}
             />
+
             <Input
               placeholder="Bio"
               value={form.bio}
               onChange={(e) => setForm({ ...form, bio: e.target.value })}
-            />{uploading && (
-             <p className="text-gray-400 text-sm mt-1">Uploading...</p>
-             )}
+            />
+
+            {uploading && (
+              <p className="text-gray-400 text-sm mt-1">Uploading...</p>
+            )}
+
             <Button type="submit" className="bg-green-600 hover:bg-green-700">
               Save Changes
             </Button>
           </form>
         </CardContent>
       </Card>
-       
     </div>
   );
 }

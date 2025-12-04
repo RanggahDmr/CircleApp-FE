@@ -14,6 +14,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import { useAppDispatch } from "./hooks/hook";
 import { useEffect } from "react";
 import { loadUser } from "./features/auth/authSlice";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   
@@ -28,7 +29,9 @@ export default function App() {
   }
 }, [dispatch]);
   return (
+    
     <AuthProvider>
+        <Toaster position="top-center" reverseOrder={false} />
     <BrowserRouter>
       <Routes>
         {/* Public */}
