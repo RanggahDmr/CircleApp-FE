@@ -194,14 +194,13 @@ const authSlice = createSlice({
       .addCase(editProfile.fulfilled, (state, action: PayloadAction<User>) => {
         if (state.user) {
           state.user = { ...state.user, ...action.payload };
-          const updateUser = { ...state.user, ...action.payload };
-          localStorage.setItem("user", JSON.stringify(updateUser));
+       
         }
       })
       .addCase(editProfile.rejected, (state, action: PayloadAction<any>) => {
         state.error = action.payload;
       })
-      // NEW: loadUser after refresh
+      //  NEW: loadUser after refresh
       .addCase(loadUser.fulfilled, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
       })
