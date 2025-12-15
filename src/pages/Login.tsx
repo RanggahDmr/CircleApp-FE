@@ -21,14 +21,14 @@ export default function Login() {
     setError("");
 
     try {
-      // ⬇️ Login user
+      
       const data = await dispatch(loginUser(form)).unwrap();
       console.log("Login success:", data);
 
-      // ⬇️ Setelah login sukses, langsung fetch data user lengkap dari /profile/me
+      
       await dispatch(loadUser());
 
-      // ⬇️ Redirect ke halaman utama
+     
       navigate("/threads");
     } catch (err: any) {
       console.error("Login error:", err);
