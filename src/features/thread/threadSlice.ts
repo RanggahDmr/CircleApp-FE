@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 //thread slice
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
@@ -30,7 +31,8 @@ export const toggleLike = createAsyncThunk<
   try {
     const token = getState().auth.token;
     const res = await fetch(
-            `http://localhost:3000/api/v1/threads/${threadId}/${liked ? "unlike" : "like"}`,
+            `http://localhost:3000/api/v1/${threadId}/${liked ? "unlike" : "like"}
+`,
       {
         method:liked ? "DELETE" : "POST",
         headers: { Authorization: `Bearer ${token}` },
