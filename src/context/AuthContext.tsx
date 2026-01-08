@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
 
  const login = async (identifier: string, password: string) => {
-  const res = await fetch("http://localhost:3000/api/v1/auth/login", {
+  const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ identifier, password }),
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     email: string;
     password: string;
   }) => {
-    const res = await fetch("http://localhost:3000/api/v1/auth/register", {
+    const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

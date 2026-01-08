@@ -17,7 +17,7 @@ export default function CreateThreadDialog({ open, onClose }: { open: boolean; o
     formData.append("content", content);
     if (file) formData.append("image", file);
 
-    const res = await fetch("http://localhost:3000/api/v1/threads", {
+    const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/threads", {
       method: "POST",
       headers: {
         Authorization : `Bearer ${token || ""}`,

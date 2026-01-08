@@ -23,7 +23,7 @@ export default function Replies() {
   useEffect(() => {
     const fetchThreadDetail = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/v1/threads/${id}`, {
+        const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/threads/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         if (!res.ok) throw new Error("Failed to fetch thread detail");
@@ -60,7 +60,7 @@ export default function Replies() {
     formData.append("content", content);
     if (image) formData.append("image", image);
 
-    const res = await fetch(`http://localhost:3000/api/v1/${id}/replies`, {
+    const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/${id}/replies`, {
       method: "POST",
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       body: formData,

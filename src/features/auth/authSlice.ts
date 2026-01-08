@@ -28,7 +28,7 @@ const initialState: AuthState = {
   error: null,
 };
 
-// ✅ NEW: auto-load user dari token
+
 export const loadUser = createAsyncThunk(
   "auth/loadUser",
   async (_, { rejectWithValue }) => {
@@ -36,7 +36,7 @@ export const loadUser = createAsyncThunk(
     if (!token) return rejectWithValue("No token found");
 
     try {
-      const res = await fetch("http://localhost:3000/api/v1/profile/me", {
+      const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/profile/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -56,7 +56,7 @@ export const loginUser = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const res = await fetch("http://localhost:3000/api/v1/auth/login", {
+      const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ identifier, password }),
@@ -79,7 +79,7 @@ export const fetchMe = createAsyncThunk(
       const token = state.auth.token;
       if (!token) throw new Error("Token tidak ada");
 
-      const res = await fetch("http://localhost:3000/api/v1/profile/me", {
+      const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/profile/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -99,7 +99,7 @@ export const fetchProfile = createAsyncThunk(
       const token = state.auth.token;
       if (!token) throw new Error("Token tidak ada");
 
-      const res = await fetch("http://localhost:3000/api/v1/profile/me", {
+      const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/profile/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -123,7 +123,7 @@ export const editProfile = createAsyncThunk(
       if (!token) throw new Error("Token tidak ada");
 
       const res = await fetch(
-        "http://localhost:3000/api/v1/auth/edit-profile",
+        "https://api-rangga-circle.liera.my.id/api/v1/auth/edit-profile",
         {
           method: "PATCH",
           headers: {

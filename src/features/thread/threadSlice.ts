@@ -30,7 +30,7 @@ export const toggleLike = createAsyncThunk<
   try {
     const token = getState().auth.token;
     const res = await fetch(
-            `http://localhost:3000/api/v1/threads/${threadId}/${liked ? "unlike" : "like"}`,
+            `https://api-rangga-circle.liera.my.id/api/v1/threads/${threadId}/${liked ? "unlike" : "like"}`,
       {
         method:liked ? "DELETE" : "POST",
         headers: { Authorization: `Bearer ${token}` },
@@ -54,7 +54,7 @@ export const fetchThreads = createAsyncThunk<
 >("threads/fetchThreads", async (_, { getState, rejectWithValue }) => {
   try {
     const token = getState().auth.token;
-    const res = await fetch("http://localhost:3000/api/v1/threads", {
+    const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/threads", {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!res.ok) throw new Error("Failed to fetch threads");
@@ -74,7 +74,7 @@ export const fetchUserProfile = createAsyncThunk(
   "threads/fetchUserProfile",
   async (userId: number, { rejectWithValue }) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/v1/profile/users/${userId}/profile`);
+      const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/profile/users/${userId}/profile`);
       if (!res.ok) throw new Error("Failed to fetch user profile");
       return await res.json();
     } catch (err: any) {
@@ -86,7 +86,7 @@ export const fetchUserThreads = createAsyncThunk(
   "threads/fetchUserThreads",
   async (userId: number, { rejectWithValue }) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/v1/profile/users/${userId}/threads`);
+      const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/profile/users/${userId}/threads`);
       if (!res.ok) throw new Error("Failed to fetch user threads");
       return await res.json();
     } catch (err: any) {

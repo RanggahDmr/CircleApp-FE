@@ -36,7 +36,7 @@ export const fetchFollowers = createAsyncThunk(
   "follow/fetchFollowers",
   async (userId: number, { rejectWithValue }) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/v1/users/${userId}/followers`);
+      const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/users/${userId}/followers`);
       if (!res.ok) throw new Error("Failed to fetch followers");
       return (await res.json()) as User[];
     } catch (err: any) {
@@ -50,7 +50,7 @@ export const fetchFollowing = createAsyncThunk(
   "follow/fetchFollowing",
   async (userId: number, { rejectWithValue }) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/v1/users/${userId}/following`);
+      const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/users/${userId}/following`);
       if (!res.ok) throw new Error("Failed to fetch following");
       return (await res.json()) as User[];
     } catch (err: any) {
@@ -67,7 +67,7 @@ export const followUser = createAsyncThunk(
       const state: any = getState();
       const token = state.auth.token;
 
-      const res = await fetch(`http://localhost:3000/api/v1/follow/${userId}`, {
+      const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/follow/${userId}`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -88,7 +88,7 @@ export const unfollowUser = createAsyncThunk(
       const state: any = getState();
       const token = state.auth.token;
 
-      const res = await fetch(`http://localhost:3000/api/v1/follow/${userId}`, {
+      const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/follow/${userId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -106,7 +106,7 @@ export const fetchFollowCounts = createAsyncThunk(
   "follow/fetchFollowCounts",
   async (userId: number, { rejectWithValue }) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/v1/users/${userId}/follow-counts`);
+      const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/users/${userId}/follow-counts`);
       if (!res.ok) throw new Error("Failed to fetch follow counts");
       return await res.json();
     } catch (err: any) {

@@ -36,7 +36,7 @@ export default function RightSidebar() {
       if (!user?.id) return;
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:3000/api/v1/users/suggested", {
+        const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/users/suggested", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -166,7 +166,7 @@ export default function RightSidebar() {
                       try {
                         const token = localStorage.getItem("token");
                         const res = await fetch(
-                          `http://localhost:3000/api/v1/follow/${u.id}`,
+                          `https://api-rangga-circle.liera.my.id/api/v1/follow/${u.id}`,
                           {
                             method: "POST",
                             headers: { Authorization: `Bearer ${token}` },
