@@ -8,7 +8,7 @@ export const searchUsers = createAsyncThunk(
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        `http://localhost:3000/api/v1/users/search?q=${encodeURIComponent(q)}`,
+        `https://api-rangga-circle.liera.my.id/api/v1/users/search?q=${encodeURIComponent(q)}`,
         {
           headers: { Authorization: `Bearer ${token}` },
           credentials: "include",

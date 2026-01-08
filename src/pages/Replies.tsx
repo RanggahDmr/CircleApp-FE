@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Heart, MessageCircle, Image as ImageIcon } from "lucide-react";
 import { socket } from "@/lib/socket";
-import { useAppSelector } from "@/hooks/hook";
+// import { useAppSelector } from "@/hooks/hook";
 
 export default function Replies() {
   const { id } = useParams(); // id thread
@@ -17,13 +17,13 @@ export default function Replies() {
   const [replies, setReplies] = useState<any[]>([]);
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const user = useAppSelector((s) => s.auth.user);
+  // const _user = useAppSelector((s) => s.auth.user);
 
   // 🔹 Fetch thread detail + replies (satu endpoint saja)
   useEffect(() => {
     const fetchThreadDetail = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/v1/threads/${id}`, {
+        const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/threads/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         if (!res.ok) throw new Error("Failed to fetch thread detail");
@@ -60,7 +60,7 @@ export default function Replies() {
     formData.append("content", content);
     if (image) formData.append("image", image);
 
-    const res = await fetch(`http://localhost:3000/api/v1/${id}/replies`, {
+    const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/${id}/replies`, {
       method: "POST",
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       body: formData,

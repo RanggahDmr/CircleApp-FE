@@ -14,7 +14,7 @@ export default function SuggestedUsers() {
   useEffect(() => {
     const fetchSuggested = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/v1/users/suggested", {
+        const res = await fetch("https://api-rangga-circle.liera.my.id/api/v1/users/suggested", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();

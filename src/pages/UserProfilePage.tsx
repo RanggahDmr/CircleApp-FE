@@ -23,7 +23,7 @@ export default function UserProfilePage() {
     if (!token) return;
 
     // 🔹 1. Fetch data profil user
-    const res = await fetch(`http://localhost:3000/api/v1/users/${username}`, {
+    const res = await fetch(`https://api-rangga-circle.liera.my.id/api/v1/users/${username}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
@@ -31,7 +31,7 @@ export default function UserProfilePage() {
 
     // 🔹 2. Langsung cek status follow (setelah profile.id tersedia)
     const followCheckRes = await fetch(
-      `http://localhost:3000/api/v1/follow/check/${data.id}`,
+      `https://api-rangga-circle.liera.my.id/api/v1/follow/check/${data.id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -58,7 +58,7 @@ export default function UserProfilePage() {
     try {
       const token = localStorage.getItem("token");
       const method = isFollowing ? "DELETE" : "POST";
-      const url = `http://localhost:3000/api/v1/follow/${profile.id}`;
+      const url = `https://api-rangga-circle.liera.my.id/api/v1/follow/${profile.id}`;
       await fetch(url, { method, headers: { Authorization: `Bearer ${token}` } });
 
       // Emit socket update
