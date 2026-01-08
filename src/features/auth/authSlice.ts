@@ -64,6 +64,7 @@ export const loginUser = createAsyncThunk(
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Login gagal");
       localStorage.setItem("token", data.token);
+      
       return data;
     } catch (err: any) {
       return rejectWithValue(err.message);
@@ -152,7 +153,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       localStorage.removeItem("token");
-      localStorage.removeItem("user"); // ✅ hapus juga user
+      localStorage.removeItem("user"); 
     },
     updateFollowersRealtime: (
       state,
@@ -214,3 +215,9 @@ const authSlice = createSlice({
 
 export const { logout, updateFollowersRealtime } = authSlice.actions;
 export default authSlice.reducer;
+
+
+
+
+
+
